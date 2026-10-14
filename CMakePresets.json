@@ -1,0 +1,50 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "release",
+      "displayName": "Release (tests, examples, benchmark vs Ruckig, Python module)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CHARQUI_BUILD_TESTS": "ON",
+        "CHARQUI_BUILD_EXAMPLES": "ON",
+        "CHARQUI_BUILD_BENCHMARK": "ON",
+        "CHARQUI_BUILD_PYTHON": "ON"
+      }
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug with sanitizers",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined -fno-omit-frame-pointer",
+        "CHARQUI_BUILD_TESTS": "ON",
+        "CHARQUI_BUILD_EXAMPLES": "OFF"
+      }
+    },
+    {
+      "name": "lib",
+      "displayName": "Library only",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/lib",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CHARQUI_BUILD_TESTS": "OFF",
+        "CHARQUI_BUILD_EXAMPLES": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "release", "configurePreset": "release" },
+    { "name": "debug", "configurePreset": "debug" },
+    { "name": "lib", "configurePreset": "lib" }
+  ],
+  "testPresets": [
+    { "name": "release", "configurePreset": "release", "output": { "outputOnFailure": true } },
+    { "name": "debug", "configurePreset": "debug", "output": { "outputOnFailure": true } }
+  ]
+}

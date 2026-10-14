@@ -1,0 +1,42 @@
+[build-system]
+requires = ["scikit-build-core>=0.10", "nanobind>=2.0"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "charqui"
+version = "0.1.0"
+description = "Jerk-limited online trajectory generation with intermediate waypoints (a modern take on Ruckig)"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = ["numpy"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: C++",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://github.com/sea-bass/charqui"
+Repository = "https://github.com/sea-bass/charqui"
+
+[project.optional-dependencies]
+test = ["pytest", "ruckig"]
+plot = ["matplotlib"]
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+cmake.build-type = "Release"
+wheel.packages = ["python/charqui"]
+sdist.exclude = ["build*", ".git"]
+
+[tool.scikit-build.cmake.define]
+CHARQUI_BUILD_PYTHON = "ON"
+CHARQUI_BUILD_TESTS = "OFF"
+CHARQUI_BUILD_EXAMPLES = "OFF"
+CHARQUI_BUILD_BENCHMARK = "OFF"
+CHARQUI_INSTALL = "OFF"
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>charqui</name>
+  <version>0.1.0</version>
+  <description>Jerk-limited online trajectory generation with intermediate waypoints (a modern C++23 recreation of the Ruckig algorithm).</description>
+  <maintainer email="sebas.a.castro@gmail.com">Sebastian Castro</maintainer>
+  <license>MIT</license>
+
+  <url type="repository">https://github.com/sea-bass/charqui</url>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <!-- Python bindings (built by default under colcon); nanobind is resolved from the Python interpreter -->
+  <build_depend>nanobind-dev</build_depend>
+  <build_depend>python3-dev</build_depend>
+  <depend>python3-numpy</depend>
+
+  <!-- C++ tests fetch doctest with CMake FetchContent; the benchmark against Ruckig is off by default -->
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

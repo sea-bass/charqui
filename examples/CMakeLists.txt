@@ -1,0 +1,7 @@
+foreach(example 01_position 02_position_offline 03_waypoints 04_waypoints_online 05_velocity 06_stop 07_minimum_duration 08_per_section_minimum_duration)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${example}.cpp)
+        add_executable(${example} ${example}.cpp)
+        target_link_libraries(${example} PRIVATE charqui::charqui)
+        target_compile_options(${example} PRIVATE $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wno-missing-field-initializers>)
+    endif()
+endforeach()
